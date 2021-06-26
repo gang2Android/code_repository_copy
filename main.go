@@ -3,7 +3,9 @@ package main
 import (
 	"code_repository_copy/config"
 	"code_repository_copy/utils"
+	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {
@@ -11,7 +13,11 @@ func main() {
 }
 
 func Run() {
-	var basePath = "." + string(os.PathSeparator) + "sites"
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	var basePath = dir + string(os.PathSeparator) + "sites"
 
 	webs := make([]config.Config, 0)
 	config.LoadConfig(&webs)
