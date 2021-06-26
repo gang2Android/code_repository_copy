@@ -11,7 +11,7 @@ func main() {
 }
 
 func Run() {
-	var basePath = "E:\\work\\temp"
+	var basePath = "." + string(os.PathSeparator) + "sites"
 
 	webs := make([]config.Config, 0)
 	config.LoadConfig(&webs)
