@@ -3,6 +3,7 @@ package main
 import (
 	"code_repository_copy/config"
 	"code_repository_copy/utils"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -18,6 +19,14 @@ func Run() {
 		log.Fatal(err)
 	}
 	var basePath = dir + string(os.PathSeparator) + "sites"
+	b, _ := utils.PathExists(basePath)
+	if b == false {
+		err := os.MkdirAll(basePath, os.ModePerm) //在当前目录下生成md目录
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
 
 	webs := make([]config.Config, 0)
 	config.LoadConfig(&webs)
