@@ -1,18 +1,6 @@
 [
   {
-    "source_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_base_web.git",
-    "target_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_oem_web.git"
-  },
-  {
-    "source_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_base_api.git",
-    "target_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_oem_api.git"
-  },
-  {
-    "source_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_base_mem.git",
-    "target_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_oem_mem.git"
-  },
-  {
-    "source_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_base_shop.git",
-    "target_repository": "https://gitee.com/ZhengZhouFeiDu/jiuling_oem_shop.git"
+    "source_repository": "源git地址,如：https://github.com/gang2Android/go_cron.git",
+    "target_repository": "目标git地址,如：https://github.com/gang2Android/go_cron1.git"
   }
 ]

@@ -11,7 +11,7 @@ func main() {
 }
 
 func Run() {
-	var basePath = ".\\sites"
+	var basePath = "E:\\work\\temp"
 
 	webs := make([]config.Config, 0)
 	config.LoadConfig(&webs)
@@ -19,16 +19,14 @@ func Run() {
 	for _, v := range webs {
 		sourceRepository := v.SourceRepository
 		targetRepository := v.TargetRepository
-		sourceDirname := utils.GetFileName(v.SourceRepository)
-		targetDirname := utils.GetFileName(v.TargetRepository)
 
-		utils.GitClone(basePath+string(os.PathSeparator)+sourceDirname, sourceRepository)
-		utils.GitClone(basePath+string(os.PathSeparator)+targetDirname, targetRepository)
+		utils.GitClone(basePath+string(os.PathSeparator), sourceRepository)
+		utils.GitClone(basePath+string(os.PathSeparator), targetRepository)
 
-		utils.CopyDir(basePath+string(os.PathSeparator)+sourceDirname+string(os.PathSeparator)+utils.GetFileName(sourceRepository),
-			basePath+string(os.PathSeparator)+targetDirname+string(os.PathSeparator)+utils.GetFileName(targetRepository))
+		sourcePath := basePath + string(os.PathSeparator) + utils.GetFileName(sourceRepository)
+		targetPath := basePath + string(os.PathSeparator) + utils.GetFileName(targetRepository)
+		utils.CopyDir(sourcePath, targetPath)
 
-		utils.Cmd("cd " + basePath + string(os.PathSeparator) + targetDirname + string(os.PathSeparator) +
-			utils.GetFileName(targetRepository) + " && git add . && git commit -m 'init' && git push")
+		utils.Cmd("cd " + basePath + string(os.PathSeparator) + utils.GetFileName(targetRepository) + " && git add . && git commit -m 'init' && git push")
 	}
 }

@@ -3,12 +3,37 @@ package utils
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
 func CopyDir(src string, dest string) {
+	fmt.Println(src, dest)
+	// 清除目标文件夹下的文件(.git除外)
+	err1 := filepath.Walk(dest+string(os.PathSeparator), func(path string, info fs.FileInfo, err error) error {
+		fmt.Println(path)
+		if strings.Contains(path, ".git") {
+			if !strings.Contains(path, ".gitignore") {
+				return nil
+			}
+		}
+		if strings.LastIndex(path, string(os.PathSeparator)) == (len(path) - 1) {
+			fmt.Println("1")
+		} else {
+			err2 := os.RemoveAll(path)
+			if err2 != nil {
+				fmt.Println(err2)
+			}
+		}
+		return nil
+	})
+	if err1 != nil {
+		fmt.Println("删除目标文件夹的内容失败-" + err1.Error())
+		return
+	}
+
 	srcOriginal := src
 	err := filepath.Walk(src, func(src string, f os.FileInfo, err error) error {
 		if f == nil {
@@ -18,7 +43,7 @@ func CopyDir(src string, dest string) {
 		fmt.Println(srcOriginal)
 		fmt.Println(dest)
 		if !f.IsDir() {
-			if strings.Contains(src, "\\.git") {
+			if strings.Contains(src, ".git") {
 				fmt.Println("跳过.git")
 				return nil
 			}
@@ -81,4 +106,3 @@ func CopyFile(src, dst string) (w int64, err error) {
 
 	return io.Copy(dstFile, srcFile)
 }
-
