@@ -12,6 +12,8 @@ var fileLocker sync.Mutex
 type Config struct {
 	SourceRepository string `json:"source_repository"`
 	TargetRepository string `json:"target_repository"`
+	SourceBranch     string `json:"source_branch"`
+	TargetBranch     string `json:"target_branch"`
 }
 
 func LoadConfig(tasks *[]Config) {

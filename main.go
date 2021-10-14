@@ -4,9 +4,7 @@ import (
 	"code_repository_copy/config"
 	"code_repository_copy/utils"
 	"fmt"
-	"log"
 	"os"
-	"path/filepath"
 )
 
 func main() {
@@ -14,11 +12,12 @@ func main() {
 }
 
 func Run() {
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
-	var basePath = dir + string(os.PathSeparator) + "sites"
+	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//var basePath = dir + string(os.PathSeparator) + "sites"
+	var basePath = "E:\\work\\temp\\" + "sites"
 	b, _ := utils.PathExists(basePath)
 	if b == false {
 		err := os.MkdirAll(basePath, os.ModePerm) //在当前目录下生成md目录
@@ -35,8 +34,8 @@ func Run() {
 		sourceRepository := v.SourceRepository
 		targetRepository := v.TargetRepository
 
-		utils.GitClone(basePath+string(os.PathSeparator), sourceRepository)
-		utils.GitClone(basePath+string(os.PathSeparator), targetRepository)
+		utils.GitClone(basePath+string(os.PathSeparator), sourceRepository, v.SourceBranch)
+		utils.GitClone(basePath+string(os.PathSeparator), targetRepository, v.TargetBranch)
 
 		sourcePath := basePath + string(os.PathSeparator) + utils.GetFileName(sourceRepository)
 		targetPath := basePath + string(os.PathSeparator) + utils.GetFileName(targetRepository)

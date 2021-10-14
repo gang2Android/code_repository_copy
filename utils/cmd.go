@@ -10,7 +10,7 @@ import (
 	"syscall"
 )
 
-func GitClone(basePath string, repository string) {
+func GitClone(basePath string, repository string, branch string) {
 	fmt.Println(basePath, repository)
 	repositoryName := GetFileName(repository)
 
@@ -25,7 +25,7 @@ func GitClone(basePath string, repository string) {
 	var cmdStr strings.Builder
 	cmdStr.WriteString("cd " + basePath)
 	cmdStr.WriteString(" && ")
-	cmdStr.WriteString("git clone " + repository)
+	cmdStr.WriteString("git clone -b " + branch + " " + repository)
 	cmdStr.WriteString(" && ")
 	cmdStr.WriteString("cd " + repositoryName)
 
