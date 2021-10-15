@@ -8,7 +8,9 @@
 [
   {
     "source_repository": "源git地址,如：https://github.com/gang2Android/go_cron.git",
+    "source_branch": "main",
     "target_repository": "目标git地址,如：https://github.com/gang2Android/go_cron1.git"
+    "target_branch": "main2"
   }
 ]
 ```

@@ -4,7 +4,9 @@ import (
 	"code_repository_copy/config"
 	"code_repository_copy/utils"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {
@@ -12,12 +14,12 @@ func main() {
 }
 
 func Run() {
-	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//var basePath = dir + string(os.PathSeparator) + "sites"
-	var basePath = "E:\\work\\temp\\" + "sites"
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	var basePath = dir + string(os.PathSeparator) + "sites"
+	//var basePath = "E:\\work\\temp\\" + "sites"
 	b, _ := utils.PathExists(basePath)
 	if b == false {
 		err := os.MkdirAll(basePath, os.ModePerm) //在当前目录下生成md目录
